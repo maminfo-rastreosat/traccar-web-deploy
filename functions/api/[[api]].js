@@ -4,7 +4,7 @@ export async function onRequest({request, env}) {
     console.log(url)
     const response = await fetch(new Request(url, request))
     if (!response.ok) {
-        console.log(response.status, await response.text())
+        console.error(response.status, await response.text())
         return new Response('server error ' + response.status, { status: response.status });
     } else {
         return response
