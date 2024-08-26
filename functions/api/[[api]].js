@@ -1,11 +1,12 @@
 export function onRequest({request, env}) {
     const url = new URL(request.url.replace('https://', 'http://'))
     url.host = env.TRACCAR_SERVER
-    try {
         console.log(url)
-        return fetch(new Request(url, request))
-    } catch (e) {
-        console.error(e)
-        return new Response(e.message, { status: 500 });
+        const response = await return fetch(new Request(url, request))
+    if (!response.ok) {
+        console.log(await response.text())
+        return new Response('server error ' + response.status, { status: response.status });
+    } else {
+        return response
     }
 }
