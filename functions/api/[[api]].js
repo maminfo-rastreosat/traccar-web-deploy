@@ -1,6 +1,7 @@
 export async function onRequest({request, env}) {
     const url = new URL(request.url)
-    if (url.pathname.startsWith('/api/positions') && env.POSITIONS_SERVER) {
+    console.log(url)
+    if (url.pathname === '/api/positions' && env.POSITIONS_SERVER) {
         const cookies = request.headers.get('Cookie') || ''
         const jSessionId = getCookie(cookies, 'JSESSIONID')
         if (jSessionId) {
